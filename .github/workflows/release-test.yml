@@ -55,6 +55,8 @@ jobs:
           git push --follow-tags origin master
 
       - name: Push release branch
+        env:
+          PRESTO_RELEASE_VERSION: ${{ steps.get-version.outputs.PRESTO_RELEASE_VERSION }}
         run: |
           git checkout -b release-${{ env.PRESTO_RELEASE_VERSION }}
           git push origin release-${{ env.PRESTO_RELEASE_VERSION }}
