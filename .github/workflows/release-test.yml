@@ -3,10 +3,6 @@ name: Presto Release Workflow - test
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
-  packages: write
-
 jobs:
   presto-release:
     name: Presto Release Workflow
@@ -14,12 +10,13 @@ jobs:
 
     permissions:
       contents: write
-      id-token: write
+      packages: write
     
     steps:
       - name: Checkout Presto source
         uses: actions/checkout@v4
         with:
+          ref: master
           show-progress: false
       - name: Set up JDK 8
         uses: actions/setup-java@v4
