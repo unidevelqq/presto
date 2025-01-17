@@ -19,20 +19,20 @@ jobs:
     steps:
       - name: Checkout Presto source
         uses: actions/checkout@v4
+        with:
+          show-progress: false
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
           java-version: '8'
           distribution: 'temurin'
-          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
       - name: Configure Git
         run: |
           git config --global --add safe.directory ${{github.workspace}}
           git config --global user.email "oss-release-bot@prestodb.io"
           git config --global user.name "oss-release-bot"
-          git remote set-url origin https://x-access-token:${{ secrets.OSS_TOKEN_ID }}@github.com/${{ github.repository }}
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git config pull.rebase false
-
       - name: Set Maven version
         run: |
           unset MAVEN_CONFIG && ./mvnw versions:set -DremoveSnapshot -ntp
