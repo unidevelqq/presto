@@ -47,7 +47,6 @@ jobs:
         env:
           PRESTO_RELEASE_VERSION: ${{ steps.get-version.outputs.PRESTO_RELEASE_VERSION }}
         run: |
-          steps.color-selector.outputs.SELECTED_COLOR 
           git reset --hard
           unset MAVEN_CONFIG && ./mvnw release:prepare --batch-mode \
             -DskipTests \
