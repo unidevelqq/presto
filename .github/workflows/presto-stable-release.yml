@@ -16,6 +16,7 @@ jobs:
       - name: Checkout Presto source
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PRESTODB_CI_TOKEN }}
           ref: master
           show-progress: false
 
@@ -30,9 +31,7 @@ jobs:
           git config --global --add safe.directory ${{github.workspace}}
           git config --global user.email "oss-release-bot@prestodb.io"
           git config --global user.name "oss-release-bot"
-          git remote set-url origin https://x-access-token:${{ secrets.PRESTODB_CI_TOKEN }}@github.com/${{ github.repository }}
           git config pull.rebase false
-          git remote -v
 
       - name: Set Maven version
         run: |
