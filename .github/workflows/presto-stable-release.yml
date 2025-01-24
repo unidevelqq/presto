@@ -18,7 +18,7 @@ jobs:
         run: echo "Unauthorized actor. Please login with prestodb-ci to run this action." && exit 1
 
       - name: Check branch 
-        if: ${{ github.ref != 'refs/tags/0.291' }}
+        if: ${{ github.ref != 'refs/heads/master' }}
         run: echo "Invalid branch. This action can only be run on the master branch." && exit 1
 
       - name: Checkout presto source
