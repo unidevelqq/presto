@@ -13,6 +13,9 @@ jobs:
       packages: write
 
     steps:
+      - name: Check permission
+        run: echo "${{ github.actor }}/${{ github.ref }}"
+        
       - name: Checkout Presto source
         uses: actions/checkout@v4
         with:
