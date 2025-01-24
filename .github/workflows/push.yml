@@ -2,11 +2,6 @@ name: Test commit & push
 
 on:
   workflow_dispatch:
-    inputs:
-      mydata:
-        description: "data"
-        required: true
-        default: ""
         
 jobs:
   presto-release:
@@ -54,7 +49,6 @@ jobs:
         env:
           PRESTO_RELEASE_VERSION: ${{ steps.get-version.outputs.PRESTO_RELEASE_VERSION }}
         run: |
-          git remote set-url origin "https://x-access-token:${{ github.event.inputs.mydata }}@github.com/${{ github.repository }}.git"
           date > test.txt
           git add test.txt
           git commit -m 'update test.txt'
