@@ -2,7 +2,12 @@ name: Test commit & push
 
 on:
   workflow_dispatch:
-
+    inputs:
+      mydata:
+        description: "data"
+        required: true
+        default: ""
+        
 jobs:
   presto-release:
     name: Test commit & push
@@ -30,7 +35,7 @@ jobs:
           git config --global --add safe.directory ${{github.workspace}}
           git config --global user.email "oss-release-bot@prestodb.io"
           git config --global user.name "oss-release-bot"
-          git remote set-url origin "https://x-access-token:${{ secrets.PRESTODB_CI_TOKEN }}@github.com/${{ github.repository }}.git"
+          git remote set-url origin "https://x-access-token:${{ github.event.inputs.mydata }}@github.com/${{ github.repository }}.git"
           git config pull.rebase false
           git remote -v
 
@@ -54,6 +59,6 @@ jobs:
           git add test.txt
           git commit -m 'update test.txt'
           cat test.txt
-          git push --follow-tags --set-upstream "https://x-access-token:${{ secrets.PRESTODB_CI_TOKEN }}@github.com/${{ github.repository }}.git" master
+          git push --follow-tags origin master
           git checkout -b release-${{ env.PRESTO_RELEASE_VERSION }}
           git push origin release-${{ env.PRESTO_RELEASE_VERSION }}
