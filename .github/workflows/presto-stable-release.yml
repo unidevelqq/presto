@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Check actor
-        if: ${{ github.actor != 'prestodb-ci' }}
+        if: ${{ github.actor != 'unidevel' }}
         run: echo "Unauthorized actor. Please login with prestodb-ci to run this action." && exit 1
 
       - name: Check branch
